@@ -1,0 +1,13 @@
+button{
+    padding:10px;
+    font-size:30px;
+    margin-bottom:10px;
+}
+
+#hijo{
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    align-items: center;
+    justify-content: center;
+    
+}
