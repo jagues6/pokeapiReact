@@ -9,12 +9,31 @@ button{
     grid-template-columns: 2fr 1fr;
     align-items: center;
     justify-content: center;
+    margin-top: 10px;
 }
 
 @media (max-width: 600px){
     #card{
         grid-template-columns: 1fr !important;
         margin-top:10px;
+    }
+
+    .pok{
+        height: 50px !important;
+        width: 100px !important;
+    }
+}
+
+@media (max-width: 400px){
+
+    .pok{
+        height: 50px !important;
+        width: 100px !important;
+    }
+
+    .tituloPok{
+        height: 70px !important;
+        width: 140px !important;
     }
 }
 
