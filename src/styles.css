@@ -9,5 +9,29 @@ button{
     grid-template-columns: 2fr 1fr;
     align-items: center;
     justify-content: center;
-    
+}
+
+@media (max-width: 600px){
+    #card{
+        grid-template-columns: 1fr !important;
+        margin-top:10px;
+    }
+}
+
+
+@media  screen and (max-width: 1000px){
+    #hijo{
+        grid-template-columns: 1fr;
+    }
+
+}
+
+@media (max-width: 1200px){
+    #tiposPokemon > h1{
+        font-size:30px !important;
+    }
+
+    #debPokemon > h1{
+        font-size:30px !important;
+    }
 }
