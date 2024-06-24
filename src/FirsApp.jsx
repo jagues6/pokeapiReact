@@ -94,7 +94,7 @@ export const FirsApp = () => {
                       
                         <div style={{ display: 'flex', width: "100%", flexDirection: 'row', justifyContent: 'space-around' }}>
                             <p style={{ color: "white", margin:"10px 0", fontStyle: "italic", fontSize:"30px"}}>Altura: {imgPokemon.height / 10}m</p>
-                            <p style={{ color: "white", margin:"10px 0", fontStyle: "italic", fontSize:"30px"}}>Altura: {imgPokemon.weight / 10}kg</p>
+                            <p style={{ color: "white", margin:"10px 0", fontStyle: "italic", fontSize:"30px"}}>Peso: {imgPokemon.weight / 10}kg</p>
                         </div>
                     </div>
                     <div id="tipos" style={{display:"flex", flexDirection: "column", justifyContent:"center", alignItems: "center", padding:"10px"}}>
