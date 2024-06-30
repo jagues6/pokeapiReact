@@ -1,3 +1,9 @@
+/* Estilos de la pantalla de pokedex */
+
+body{
+    margin: 0 !important;
+}
+
 button{
     padding:10px;
     font-size:30px;
@@ -35,6 +41,20 @@ button{
         height: 70px !important;
         width: 140px !important;
     }
+
+    .fila3{
+        grid-template-columns: 1fr !important;
+    }
+
+    .filtro > input{
+        height: 10px;
+        width: 10px;
+        margin: 20px 15px !important;
+    }
+
+    .filtro > label{
+        font-size: 20px;
+    }
 }
 
 
@@ -54,3 +74,98 @@ button{
         font-size:30px !important;
     }
 }
+
+
+/* Estilos de la pantalla de citas */
+
+/*html {
+    min-height: 100%;
+    position: relative;
+  } */
+  
+
+  
+  #contenedor{
+    display: grid;
+    justify-content: center;
+    align-items: center;
+  }
+
+  #citas{
+    margin: 0 15px
+  }
+  
+  #titulo{
+    height: 10px;
+    width: 70%;
+    background-color: green;
+  }
+  
+  .fila3{
+    display: grid;
+    grid-template-columns: 1fr 5fr;
+    gap: 20px;
+    padding-bottom: 60px;
+    z-index: 100;
+  }
+  
+  .fila3 > div{
+    
+    margin: 0;
+  }
+  
+  label{
+    font-size: 30px;
+  }
+  
+  .filtro{
+    background-color:#7bd753;
+    border-radius: 10px;
+  }
+
+  .cards{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 30px;
+    grid-auto-flow:row
+  }
+
+  .formulario{
+    display: flex;
+    flex-direction: column;
+    width: 500px;
+  }
+
+  
+  .btnAdd{
+    display: flex;
+    justify-content: end;
+    margin-right: 10px;
+    margin-bottom: 20px;
+  }
+
+  #cerrar{
+    padding: 0px 10px;
+  }
+
+  #cerrar:hover{
+    cursor: pointer;
+  }
+  
+  #footer{
+    height: 50px;
+    background-color: green;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    
+  }
+  
+  #footer > p{
+    color: white;
+    font-size: 30px;
+    
+  }
