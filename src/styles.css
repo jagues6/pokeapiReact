@@ -28,6 +28,7 @@ button{
         height: 50px !important;
         width: 100px !important;
     }
+
 }
 
 @media (max-width: 400px){
@@ -55,6 +56,10 @@ button{
     .filtro > label{
         font-size: 20px;
     }
+
+    .home{
+        grid-template-columns: 1fr ;
+    }
 }
 
 
@@ -65,6 +70,12 @@ button{
 
 }
 
+@media (max-width: 900px){
+    .home{
+        grid-template-columns: 1fr 1fr;
+}
+}
+
 @media (max-width: 1200px){
     #tiposPokemon > h1{
         font-size:30px !important;
@@ -73,6 +84,8 @@ button{
     #debPokemon > h1{
         font-size:30px !important;
     }
+
+    
 }
 
 
@@ -169,3 +182,25 @@ button{
     font-size: 30px;
     
   }
+
+
+/* Estilos de la pantalla de home */
+
+.home{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 30px;
+    margin:50px
+}
+
+.homeBebidas{
+    width: 100%;
+}
+
+.col{
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 10px;
+    border: 1px solid black;
+}

@@ -18,7 +18,7 @@ import FormControl from '@mui/material/FormControl';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
+//import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 import { TimePicker } from '@mui/x-date-pickers/TimePicker';
 import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
 import dayjs from 'dayjs';
@@ -44,17 +44,25 @@ function Citas() {
     ])
 
     const [open, setOpen] = useState(false);
-    const [input, setInput] = useState({ mascota: "", estado: 0, propietario: "", sintomas: "", fecha: dayjs('2022-04-17'), hora: "", tipo: "", telefono: 0 });
+    const [bd, setBd] = useState(false);
+    const [input, setInput] = useState({ mascota: "", estado: 0, propietario: "", sintomas: "", fecha: dayjs('2024-04-17'), hora: "", tipo: "No aplica", telefono: 0 });
 
-    const changeValue = (e)=>{
-        setInput(prev => ({...prev, fecha:e.$y+"-"+e.$M.toString().padStart(2,0)+"-"+e.$D.toString().padStart(2,0)}))
+    const changeValue = (e) => {
+        console.log(e);
+        /* setInput(prev => ({...prev, fecha:e.$y+"-"+e.$M?.toString().padStart(2,0)+"-"+e.$D?.toString().padStart(2,0),
+            mascota:e.target.value
+        })) */
+        setInput({ ...input, [e.target.id]: e.target.value })
         console.log(input);
     }
 
     const handleClickOpen = (e) => {
         setOpen(true);
-        console.log(e.fecha);
-        setInput({ mascota: e.mascota, propietario: e.propietario, telefono: e.telefono, fecha: dayjs(e.fecha), hora:e.hora})
+        if (bd) {
+            console.log(e.tipo);
+            setInput({ mascota: e.mascota, propietario: e.propietario, telefono: e.telefono, fecha: dayjs(e.fecha), hora: e.hora, tipo: e.tipo, sintomas: e.sintomas })
+        }
+
     };
 
     const handleClose = () => {
@@ -71,7 +79,7 @@ function Citas() {
                     Agregar cita
                 </Button>
             </div>
-            <div style={{ marginBottom: "30px" }}>
+            <div style={{ marginBottom: "50px" }}>
                 <hr id='titulo' />
             </div>
             <div className='fila3'>
@@ -160,39 +168,44 @@ function Citas() {
                     <div className='formulario'>
                         <TextField
                             label="Nombre Mascota"
-                            id="outlined-size-small"
+                            id="mascota"
                             size="small"
                             value={input.mascota}
+                            onChange={changeValue}
                             sx={{ marginBottom: "10px", marginTop: "20px" }}
                         />
                         <TextField
                             label="Propietario"
-                            id="outlined-size-small"
+                            id="propietario"
                             size="small"
                             value={input.propietario}
+                            onChange={changeValue}
                             sx={{ marginBottom: "10px" }}
                         />
 
                         <TextField
                             label="Telefono"
-                            id="outlined-size-small"
+                            id="telefono"
                             size="small"
                             value={input.telefono}
+                            onChange={changeValue}
                             sx={{ marginBottom: "0px" }}
                         />
-                        <div style={{display:"flex"}}>
+                        <div style={{ display: "flex" }}>
                             <LocalizationProvider dateAdapter={AdapterDayjs}>
                                 <DemoContainer components={['DatePicker']} sx={{ margin: "10px 0", padding: "10px" }}>
                                     <DatePicker
                                         label="Fecha de cita"
+                                        id="fecha"
                                         value={input.fecha}
+
                                         onChange={changeValue}
                                     />
                                 </DemoContainer>
                             </LocalizationProvider>
                             <LocalizationProvider dateAdapter={AdapterDayjs}>
-                                <DemoContainer components={['TimePicker']} sx={{ margin: "10px 0", marginLeft:"10px", padding: "10px" }}>
-                                    <TimePicker label="Basic time picker"  />
+                                <DemoContainer components={['TimePicker']} sx={{ margin: "10px 0", marginLeft: "10px", padding: "10px" }}>
+                                    <TimePicker label="Basic time picker" id="hora" onChange={changeValue} />
                                 </DemoContainer>
                             </LocalizationProvider>
                         </div>
@@ -203,6 +216,7 @@ function Citas() {
                             id="outlined-size-small"
                             size="small"
                             value={input.telefono}
+                            onChange={changeValue}
                             sx={{ marginBottom: "10px" }}
                         />
                         <FormControl size="small">
@@ -213,6 +227,7 @@ function Citas() {
                                 label="Tipo"
                                 color="primary"
                                 value={input.tipo}
+                                onChange={changeValue}
                                 sx={{ marginBottom: "10px" }}
                             >
                                 <MenuItem value="No aplica">
@@ -222,6 +237,7 @@ function Citas() {
                                 <MenuItem value={Gato}>Gato</MenuItem>
                                 <MenuItem value={Iguana}>Iguana</MenuItem>
                                 <MenuItem value={Cabra}>Cabra</MenuItem>
+                                <MenuItem value={Loro}>Loro</MenuItem>
                                 {/* <MenuItem value={Roedor}>Roedor</MenuItem>
                             <MenuItem value={Oso}>Oso</MenuItem>
                             <MenuItem value={Gallina}>Gallina</MenuItem>
@@ -234,6 +250,7 @@ function Citas() {
                             label="Sintomas"
                             multiline
                             value={input.sintomas}
+                            onChange={changeValue}
                             rows={4}
                             sx={{ marginBottom: "10px" }}
                         />

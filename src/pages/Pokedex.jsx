@@ -84,7 +84,7 @@ export const Pokedex = () => {
 
 
     return (
-        <div style={{ textAlign: 'center' }}>
+        <div style={{ textAlign: 'center', margin:"0 15px" }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: "center" }}>
                 <img className='pok' style={{ height: "100px", width: "200px" }} src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQHPCEu5wYHfkiJzriogDrM2_Tcfus-m1MLVw&s" alt="" />
                 <img className='tituloPok' style={{ height: "100px", width: "300px" }} src="https://img.genial.ly/5e92f91205731330e40eb30f/1c6f47d4-6372-41ee-a639-e69a530a7bd8.png" alt="" />
