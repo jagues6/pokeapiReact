@@ -45,7 +45,7 @@ function Citas() {
 
     const [open, setOpen] = useState(false);
     const [bd, setBd] = useState(false);
-    const [input, setInput] = useState({ mascota: "", estado: 0, propietario: "", sintomas: "", fecha: dayjs('2024-04-17'), hora: "", tipo: "No aplica", telefono: 0 });
+    const [input, setInput] = useState({ mascota: "", estado: 0, propietario: "", sintomas: "", fecha: dayjs('2024-04-17'), hora: dayjs("2024-04-17T12:20"), tipo: "No aplica", telefono: 0 });
 
     const changeValue = (e) => {
         console.log(e);
@@ -53,27 +53,25 @@ function Citas() {
             mascota:e.target.value
         })) */
         setInput({ ...input, [e.target.id]: e.target.value })
-        //console.log(input);
+
     }
 
 
     const handleClickOpen = (e, b) => {
         setOpen(true);
-        
-        console.log(e);
-        setBd(b)
         console.log(bd);
         if (b == true) {
-            console.log(e.fecha);
-            setInput({ mascota: e.mascota, propietario: e.propietario, telefono: e.telefono, fecha: dayjs(e.fecha), hora: e.hora, tipo: e.tipo, sintomas: e.sintomas })
+            console.log(e.hora);
+            setInput({ mascota: e.mascota, propietario: e.propietario, telefono: e.telefono, fecha: dayjs(e.fecha), hora: dayjs(e.hora), tipo: e.tipo, sintomas: e.sintomas })
+            setBd(b)
         }
         setBd(false)
-        
+
     };
 
     const handleClose = () => {
         setOpen(false);
-        setInput({ mascota: "", estado: 0, propietario: "", sintomas: "", fecha: dayjs('2024-04-17'), hora: "", tipo: "No aplica", telefono: 0 })
+        setInput({ mascota: "", estado: 0, propietario: "", sintomas: "", fecha: dayjs('2024-04-17'), hora: dayjs('2024-04-17T12:20'), tipo: "No aplica", telefono: 0 })
     };
 
     return (
@@ -211,7 +209,8 @@ function Citas() {
                             </LocalizationProvider>
                             <LocalizationProvider dateAdapter={AdapterDayjs}>
                                 <DemoContainer components={['TimePicker']} sx={{ margin: "10px 0", marginLeft: "10px", padding: "10px" }}>
-                                    <TimePicker label="Basic time picker" id="hora" onChange={changeValue} />
+                                    <TimePicker label="Basic time picker" id="hora" value={input.hora}
+                                    onChange={(value) => setInput({ ...input, hora: value.$H.toString() + "-" })} />
                                 </DemoContainer>
                             </LocalizationProvider>
                         </div>
