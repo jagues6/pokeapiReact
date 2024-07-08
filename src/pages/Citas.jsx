@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Button } from '@mui/material';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
@@ -53,20 +53,27 @@ function Citas() {
             mascota:e.target.value
         })) */
         setInput({ ...input, [e.target.id]: e.target.value })
-        console.log(input);
+        //console.log(input);
     }
 
-    const handleClickOpen = (e) => {
+
+    const handleClickOpen = (e, b) => {
         setOpen(true);
-        if (bd) {
-            console.log(e.tipo);
+        
+        console.log(e);
+        setBd(b)
+        console.log(bd);
+        if (b == true) {
+            console.log(e.fecha);
             setInput({ mascota: e.mascota, propietario: e.propietario, telefono: e.telefono, fecha: dayjs(e.fecha), hora: e.hora, tipo: e.tipo, sintomas: e.sintomas })
         }
-
+        setBd(false)
+        
     };
 
     const handleClose = () => {
         setOpen(false);
+        setInput({ mascota: "", estado: 0, propietario: "", sintomas: "", fecha: dayjs('2024-04-17'), hora: "", tipo: "No aplica", telefono: 0 })
     };
 
     return (
@@ -137,7 +144,7 @@ function Citas() {
                                     </div>
                                 </CardContent>
                                 <CardActions sx={{ display: "flex", justifyContent: "end", position: "absolute", bottom: "0", right: "0" }}>
-                                    <Button variant='outlined' size="small" onClick={() => { handleClickOpen(e) }}>📝</Button>
+                                    <Button variant='outlined' size="small" onClick={() => { handleClickOpen(e, true) }}>📝</Button>
                                     <Button variant='outlined' color='error' size="small">❌</Button>
                                 </CardActions>
                             </Card>
@@ -198,8 +205,7 @@ function Citas() {
                                         label="Fecha de cita"
                                         id="fecha"
                                         value={input.fecha}
-
-                                        onChange={changeValue}
+                                        onChange={(value) => setInput({ ...input, fecha: value.$y.toString() + "-" + value.$M.toString() + "-" + value.$D.toString() })}
                                     />
                                 </DemoContainer>
                             </LocalizationProvider>
