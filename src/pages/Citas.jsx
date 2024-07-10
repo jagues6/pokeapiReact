@@ -21,6 +21,8 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 //import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 import { TimePicker } from '@mui/x-date-pickers/TimePicker';
 import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
+import Snackbar from '@mui/material/Snackbar';
+import Alert from '@mui/material/Alert';
 import dayjs from 'dayjs';
 import utc from 'dayjs/plugin/utc';
 import Iguana from "../images/iguana.png"
@@ -33,17 +35,19 @@ dayjs.extend(utc)
 
 function Citas() {
     const [datos, setDatos] = useState([
-        { mascota: "Koki", estado: 0, propietario: "Mario", sintomas: "Dolor en el lomo", fecha: "2024-11-25", hora: "12:20 p.m", tipo: Iguana, telefono: 3882255664 },
-        { mascota: "Muñeca", estado: 0, propietario: "Mario", sintomas: "Dolor en el lomo", fecha: "2024-11-25", hora: "12:20 p.m", tipo: Perro, telefono: 3882255664 },
-        { mascota: "Ratatuil", estado: 1, propietario: "Mario", sintomas: "Dolor en el lomo", fecha: "2024-11-25", hora: "12:20 p.m", tipo: Gato, telefono: 3882255664 },
-        { mascota: "Thor", estado: 0, propietario: "Mario", sintomas: "Sin pico", fecha: "2024-11-25", hora: "12:20 p.m", tipo: Loro, telefono: 3882255664 },
-        { mascota: "Koki", estado: 1, propietario: "Mario", sintomas: "Dolor en el lomo", fecha: "2024-11-25", hora: "12:20 p.m", tipo: Cabra, telefono: 3882255664 },
-        { mascota: "Muñeca", estado: 2, propietario: "Mario", sintomas: "Dolor en el lomo", fecha: "2024-11-25", hora: "12:20 p.m", tipo: Perro, telefono: 3882255664 },
-        { mascota: "Ratatuil", estado: 0, propietario: "Mario", sintomas: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad hic aperiam alias, at sequi optio ipsa doloribus repellat officiis nostrum asperiores excepturi dolor quidem voluptatibus ea dolores repudiandae tempora aliquam. ", fecha: "2024-11-25", hora: "12:20 p.m", tipo: Iguana, telefono: 3882255664 },
-        { mascota: "Thor", estado: 1, propietario: "Mario", sintomas: "Sin pico", fecha: "2024-11-25", hora: "12:20 p.m", tipo: Loro, telefono: 3882255664 },
+        { mascota: "Koki", estado: 0, propietario: "Mario", sintomas: "Dolor en el lomo", fecha: "2024-11-25", hora: "2024-11-25T12:20", tipo: Iguana, telefono: 3882255664 },
+        { mascota: "Muñeca", estado: 0, propietario: "Mario", sintomas: "Dolor en el lomo", fecha: "2024-11-25", hora: "2024-11-25T12:20", tipo: Perro, telefono: 3882255664 },
+        { mascota: "Ratatuil", estado: 1, propietario: "Mario", sintomas: "Dolor en el lomo", fecha: "2024-11-25", hora: "2024-11-25T12:20", tipo: Gato, telefono: 3882255664 },
+        { mascota: "Thor", estado: 0, propietario: "Mario", sintomas: "Sin pico", fecha: "2024-11-25", hora: "2024-11-25T12:20", tipo: Loro, telefono: 3882255664 },
+        { mascota: "Koki", estado: 1, propietario: "Mario", sintomas: "Dolor en el lomo", fecha: "2024-11-25", hora: "2024-11-25T12:20", tipo: Cabra, telefono: 3882255664 },
+        { mascota: "Muñeca", estado: 2, propietario: "Mario", sintomas: "Dolor en el lomo", fecha: "2024-11-25", hora: "2024-11-25T12:20", tipo: Perro, telefono: 3882255664 },
+        { mascota: "Ratatuil", estado: 0, propietario: "Mario", sintomas: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad hic aperiam alias, at sequi optio ipsa doloribus repellat officiis nostrum asperiores excepturi dolor quidem voluptatibus ea dolores repudiandae tempora aliquam. ", fecha: "2024-11-25", hora: "2024-11-25T12:20", tipo: Iguana, telefono: 3882255664 },
+        { mascota: "Thor", estado: 1, propietario: "Mario", sintomas: "Sin pico", fecha: "2024-11-25", hora: "2024-11-25T12:20", tipo: Loro, telefono: 3882255664 },
     ])
 
     const [open, setOpen] = useState(false);
+    const [openAlert, setOpenAlert] = useState(true);
+    const [error, setError] = useState("")
     const [bd, setBd] = useState(false);
     const [input, setInput] = useState({ mascota: "", estado: 0, propietario: "", sintomas: "", fecha: dayjs('2024-04-17'), hora: dayjs("2024-04-17T12:20"), tipo: "No aplica", telefono: 0 });
 
@@ -73,6 +77,27 @@ function Citas() {
         setOpen(false);
         setInput({ mascota: "", estado: 0, propietario: "", sintomas: "", fecha: dayjs('2024-04-17'), hora: dayjs('2024-04-17T12:20'), tipo: "No aplica", telefono: 0 })
     };
+
+    const handleClose2=()=>{
+        setOpenAlert(false)
+    }
+
+    const saveData = () => {
+        if (bd == false) {
+            setInput({
+                ...input, mascota: input.mascota, propietario: input.propietario, sintomas: input.sintomas,
+                fecha: input.fecha, hora: input.hora, estado: 0, tipo: input.tipo, telefono: input.telefono
+            })
+        } else {
+
+        }
+    }
+
+    const validationData = () => {
+        if (!input.mascota) {
+            setError("Por favor digite el nombre de la mascota")
+        }
+    }
 
     return (
         <div id='citas'>
@@ -210,7 +235,7 @@ function Citas() {
                             <LocalizationProvider dateAdapter={AdapterDayjs}>
                                 <DemoContainer components={['TimePicker']} sx={{ margin: "10px 0", marginLeft: "10px", padding: "10px" }}>
                                     <TimePicker label="Basic time picker" id="hora" value={input.hora}
-                                    onChange={(value) => setInput({ ...input, hora: value.$H.toString() + "-" })} />
+                                        onChange={(value) => setInput({ ...input, hora: value.$H.toString() + "-" })} />
                                 </DemoContainer>
                             </LocalizationProvider>
                         </div>
@@ -264,11 +289,23 @@ function Citas() {
                 </DialogContent>
                 <DialogActions>
                     <Button variant='outlined' color="success" onClick={handleClose}>Cerrar</Button>
-                    <Button variant='outlined' color="error" autoFocus>
+                    <Button variant='outlined' color="error" autoFocus onClick={validationData}>
                         Guardar
                     </Button>
                 </DialogActions>
             </Dialog>
+            <Snackbar open={openAlert} autoHideDuration={3000} onClose={handleClose2} anchorOrigin={{ vertical: 'top',
+                        horizontal: 'center'}}>
+                <Alert
+                    onClose={handleClose2}
+                    severity="success"
+                    variant="filled"
+                    sx={{ width: '100%' }}
+                    
+                >
+                    This is a success Alert inside a Snackbar!
+                </Alert>
+            </Snackbar>
         </div>
     )
 }
