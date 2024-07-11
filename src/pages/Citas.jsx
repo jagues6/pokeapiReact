@@ -32,24 +32,27 @@ import Gato from "../images/gato.gif"
 import Cabra from "../images/cabra.gif"
 
 dayjs.extend(utc)
+console.log(dayjs("2024-04-17T15:00").hour()+":"+dayjs("2024-04-17T15:30").minute());
 
 function Citas() {
     const [datos, setDatos] = useState([
-        { mascota: "Koki", estado: 0, propietario: "Mario", sintomas: "Dolor en el lomo", fecha: "2024-11-25", hora: "2024-11-25T12:20", tipo: Iguana, telefono: 3882255664 },
-        { mascota: "Muñeca", estado: 0, propietario: "Mario", sintomas: "Dolor en el lomo", fecha: "2024-11-25", hora: "2024-11-25T12:20", tipo: Perro, telefono: 3882255664 },
-        { mascota: "Ratatuil", estado: 1, propietario: "Mario", sintomas: "Dolor en el lomo", fecha: "2024-11-25", hora: "2024-11-25T12:20", tipo: Gato, telefono: 3882255664 },
-        { mascota: "Thor", estado: 0, propietario: "Mario", sintomas: "Sin pico", fecha: "2024-11-25", hora: "2024-11-25T12:20", tipo: Loro, telefono: 3882255664 },
-        { mascota: "Koki", estado: 1, propietario: "Mario", sintomas: "Dolor en el lomo", fecha: "2024-11-25", hora: "2024-11-25T12:20", tipo: Cabra, telefono: 3882255664 },
-        { mascota: "Muñeca", estado: 2, propietario: "Mario", sintomas: "Dolor en el lomo", fecha: "2024-11-25", hora: "2024-11-25T12:20", tipo: Perro, telefono: 3882255664 },
-        { mascota: "Ratatuil", estado: 0, propietario: "Mario", sintomas: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad hic aperiam alias, at sequi optio ipsa doloribus repellat officiis nostrum asperiores excepturi dolor quidem voluptatibus ea dolores repudiandae tempora aliquam. ", fecha: "2024-11-25", hora: "2024-11-25T12:20", tipo: Iguana, telefono: 3882255664 },
-        { mascota: "Thor", estado: 1, propietario: "Mario", sintomas: "Sin pico", fecha: "2024-11-25", hora: "2024-11-25T12:20", tipo: Loro, telefono: 3882255664 },
+        { mascota: "Koki", estado: 0, propietario: "Mario", sintomas: "Dolor en el lomo", fecha: "2024-11-25", hora: dayjs("2024-04-17T15:00").hour()+":"+dayjs("2024-04-17T15:30").minute(), tipo: Iguana, telefono: 3882255664 },
+        { mascota: "Muñeca", estado: 0, propietario: "Mario", sintomas: "Dolor en el lomo", fecha: "2024-11-25", hora: dayjs("2024-04-17T08:00").hour(), tipo: Perro, telefono: 3882255664 },
+        { mascota: "Ratatuil", estado: 1, propietario: "Mario", sintomas: "Dolor en el lomo", fecha: "2024-11-25", hora: dayjs("2024-04-17T08:00").hour(), tipo: Gato, telefono: 3882255664 },
+        { mascota: "Thor", estado: 0, propietario: "Mario", sintomas: "Sin pico", fecha: "2024-11-25", hora: dayjs("2024-04-17T08:00").hour(), tipo: Loro, telefono: 3882255664 },
+        { mascota: "Koki", estado: 1, propietario: "Mario", sintomas: "Dolor en el lomo", fecha: "2024-11-25", hora: dayjs("2024-04-17T08:00").hour(), tipo: Cabra, telefono: 3882255664 },
+        { mascota: "Muñeca", estado: 2, propietario: "Mario", sintomas: "Dolor en el lomo", fecha: "2024-11-25", hora: dayjs("2024-04-17T08:00").hour(), tipo: Perro, telefono: 3882255664 },
+        { mascota: "Ratatuil", estado: 0, propietario: "Mario", sintomas: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad hic aperiam alias, at sequi optio ipsa doloribus repellat officiis nostrum asperiores excepturi dolor quidem voluptatibus ea dolores repudiandae tempora aliquam. ", fecha: "2024-11-25", hora: dayjs("2024-04-17T08:00").hour(), tipo: Iguana, telefono: 3882255664 },
+        { mascota: "Thor", estado: 1, propietario: "Mario", sintomas: "Sin pico", fecha: "2024-11-25", hora: dayjs("2024-04-17T08:00").hour(), tipo: Loro, telefono: 3882255664 },
     ])
 
     const [open, setOpen] = useState(false);
-    const [openAlert, setOpenAlert] = useState(true);
+    const [openAlert, setOpenAlert] = useState(false);
     const [error, setError] = useState("")
     const [bd, setBd] = useState(false);
-    const [input, setInput] = useState({ mascota: "", estado: 0, propietario: "", sintomas: "", fecha: dayjs('2024-04-17'), hora: dayjs("2024-04-17T12:20"), tipo: "No aplica", telefono: 0 });
+    const [input, setInput] = useState({ mascota: "", estado: 0, propietario: "", sintomas: "", fecha: dayjs(dayjs().add(1, 'day')), hora: dayjs("2024-04-17T08:00"), tipo: "No aplica", telefono: 0 });
+
+
 
     const changeValue = (e) => {
         console.log(e);
@@ -70,12 +73,12 @@ function Citas() {
             setBd(b)
         }
         setBd(false)
-
+        console.log(input);
     };
 
     const handleClose = () => {
         setOpen(false);
-        setInput({ mascota: "", estado: 0, propietario: "", sintomas: "", fecha: dayjs('2024-04-17'), hora: dayjs('2024-04-17T12:20'), tipo: "No aplica", telefono: 0 })
+        setInput({ mascota: "", estado: 0, propietario: "", sintomas: "", fecha: dayjs(dayjs().add(1, 'day')), hora: dayjs('2024-04-17T08:20'), tipo: "No aplica", telefono: 0 })
     };
 
     const handleClose2=()=>{
@@ -84,18 +87,32 @@ function Citas() {
 
     const saveData = () => {
         if (bd == false) {
-            setInput({
-                ...input, mascota: input.mascota, propietario: input.propietario, sintomas: input.sintomas,
+            setDatos({
+                ...datos, mascota: input.mascota, propietario: input.propietario, sintomas: input.sintomas,
                 fecha: input.fecha, hora: input.hora, estado: 0, tipo: input.tipo, telefono: input.telefono
             })
-        } else {
-
         }
     }
 
     const validationData = () => {
         if (!input.mascota) {
+            setOpenAlert(true)
             setError("Por favor digite el nombre de la mascota")
+        }else if (!input.propietario){
+            setOpenAlert(true)
+            setError("Por favor digite el nombre del propietario")
+        }else if (!input.sintomas){
+            setOpenAlert(true)
+            setError("Por favor digite los sintomas")
+        }else if (!input.telefono){
+            setOpenAlert(true)
+            setError("Por favor digite el telefono")
+        }else if (!input.tipo){
+            setOpenAlert(true)
+            setError("Por favor digite seleccione el tipo de mascota")
+        }else if (!input.fecha){
+            setOpenAlert(true)
+            setError("Por favor digite el nombre del propietario")
         }
     }
 
@@ -226,6 +243,7 @@ function Citas() {
                                 <DemoContainer components={['DatePicker']} sx={{ margin: "10px 0", padding: "10px" }}>
                                     <DatePicker
                                         label="Fecha de cita"
+                                        minDate={dayjs().add(1, 'day')}
                                         id="fecha"
                                         value={input.fecha}
                                         onChange={(value) => setInput({ ...input, fecha: value.$y.toString() + "-" + value.$M.toString() + "-" + value.$D.toString() })}
@@ -234,7 +252,8 @@ function Citas() {
                             </LocalizationProvider>
                             <LocalizationProvider dateAdapter={AdapterDayjs}>
                                 <DemoContainer components={['TimePicker']} sx={{ margin: "10px 0", marginLeft: "10px", padding: "10px" }}>
-                                    <TimePicker label="Basic time picker" id="hora" value={input.hora}
+                                    <TimePicker label="Basic time picker" id="hora" value={input.hora} 
+                                        minTime={dayjs().set('hour', 18).startOf('hour')}
                                         onChange={(value) => setInput({ ...input, hora: value.$H.toString() + "-" })} />
                                 </DemoContainer>
                             </LocalizationProvider>
@@ -295,15 +314,15 @@ function Citas() {
                 </DialogActions>
             </Dialog>
             <Snackbar open={openAlert} autoHideDuration={3000} onClose={handleClose2} anchorOrigin={{ vertical: 'top',
-                        horizontal: 'center'}}>
+                        horizontal: 'right'}}>
                 <Alert
                     onClose={handleClose2}
-                    severity="success"
+                    severity="error"
                     variant="filled"
                     sx={{ width: '100%' }}
                     
                 >
-                    This is a success Alert inside a Snackbar!
+                    {error}
                 </Alert>
             </Snackbar>
         </div>
