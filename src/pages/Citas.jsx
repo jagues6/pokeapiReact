@@ -32,7 +32,6 @@ import Gato from "../images/gato.gif"
 import Cabra from "../images/cabra.gif"
 
 dayjs.extend(utc)
-console.log(dayjs("2024-04-17T15:00").hour()+":"+dayjs("2024-04-17T15:30").minute()+":00");
 
 function Citas() {
     const [datos, setDatos] = useState([
@@ -46,20 +45,22 @@ function Citas() {
         { mascota: "Thor", estado: 1, propietario: "Mario", sintomas: "Sin pico", fecha: "2024-11-25", hora: dayjs("2024-04-17T08:00").hour(), tipo: Loro, telefono: 3882255664 },
     ])
 
+    console.log(datos);
+
     const [open, setOpen] = useState(false);
     const [openAlert, setOpenAlert] = useState(false);
     const [error, setError] = useState("")
     const [bd, setBd] = useState(false);
-    const [input, setInput] = useState({ mascota: "", estado: 0, propietario: "", sintomas: "", fecha: dayjs(dayjs().add(1, 'day')), hora: dayjs("2024-04-17T08:00"), tipo: "No aplica", telefono: 0 });
+    const [input, setInput] = useState({ mascota: "", estado: 0, propietario: "", sintomas: "", fecha: "", hora: "", tipo: "No aplica", telefono: 0 });
 
 
 
     const changeValue = (e) => {
-        console.log(e);
+        console.log(e.target);
         /* setInput(prev => ({...prev, fecha:e.$y+"-"+e.$M?.toString().padStart(2,0)+"-"+e.$D?.toString().padStart(2,0),
             mascota:e.target.value
         })) */
-        setInput({ ...input, [e.target.id]: e.target.value })
+        setInput({ ...input, [e.target.name]: e.target.value })
 
     }
 
@@ -87,12 +88,15 @@ function Citas() {
 
     const saveData = () => {
         if (bd == false) {
-            setDatos({
-                ...datos, mascota: input.mascota, propietario: input.propietario, sintomas: input.sintomas,
-                fecha: input.fecha, hora: input.hora, estado: 0, tipo: input.tipo, telefono: input.telefono
-            })
+            setDatos(
+                prevValue => [{
+                    mascota: input.mascota, propietario: input.propietario, sintomas: input.sintomas,
+                    fecha: input.fecha, hora: input.hora, estado: 0, tipo: input.tipo, telefono: input.telefono
+                },...prevValue] 
+            )
         }
     }
+
 
     const validationData = () => {
         if (!input.mascota) {
@@ -107,7 +111,7 @@ function Citas() {
         }else if (!input.telefono){
             setOpenAlert(true)
             setError("Por favor digite el telefono")
-        }else if (!input.tipo){
+        }else if (input.tipo=="No aplica" && !input.tipo){
             setOpenAlert(true)
             setError("Por favor digite seleccione el tipo de mascota")
         }else if (!input.fecha){
@@ -161,7 +165,7 @@ function Citas() {
                                         Telefono: {e.telefono}
                                     </Typography>
                                     <Typography sx={{ textAlign: "justify" }} gutterBottom variant="body1" component="div">
-                                        Fecha: {e.fecha} Hora: {e.hora}
+                                        Fecha: {dayjs(e.fecha).day().toString().padStart(2,"0")+"-"+dayjs(e.fecha).month().toString().padStart(2,"0")+"-"+dayjs(e.fecha).year()} Hora: {dayjs(e.hora).hour().toString().padStart(2,"0")+":"+dayjs(e.hora).minute().toString().padStart(2,"0")+":"+dayjs(e.hora).second().toString().padStart(2,"0")}
                                     </Typography>
 
                                     <Typography sx={{ textAlign: "justify" }} variant="body2" color="text.secondary">
@@ -220,7 +224,7 @@ function Citas() {
                     <div className='formulario'>
                         <TextField
                             label="Nombre Mascota"
-                            id="mascota"
+                            name="mascota"
                             size="small"
                             value={input.mascota}
                             onChange={changeValue}
@@ -228,7 +232,7 @@ function Citas() {
                         />
                         <TextField
                             label="Propietario"
-                            id="propietario"
+                            name="propietario"
                             size="small"
                             value={input.propietario}
                             onChange={changeValue}
@@ -237,7 +241,7 @@ function Citas() {
 
                         <TextField
                             label="Telefono"
-                            id="telefono"
+                            name="telefono"
                             size="small"
                             value={input.telefono}
                             onChange={changeValue}
@@ -250,35 +254,26 @@ function Citas() {
                                         label="Fecha de cita"
                                         minDate={dayjs().add(1, 'day')}
                                         id="fecha"
-                                        value={input.fecha}
-                                        onChange={(value) => setInput({ ...input, fecha: value.$y.toString() + "-" + value.$M.toString() + "-" + value.$D.toString() })}
+                                        
+                                        onChange={(value) => setInput({ ...input, fecha: value })}
                                     />
                                 </DemoContainer>
                             </LocalizationProvider>
                             <LocalizationProvider dateAdapter={AdapterDayjs}>
                                 <DemoContainer components={['TimePicker']} sx={{ margin: "10px 0", marginLeft: "10px", padding: "10px" }}>
-                                    <TimePicker label="Basic time picker" id="hora" value={input.hora} 
+                                    <TimePicker label="Basic time picker" id="hora"  
                                          
-                                        onChange={(value) => setInput({ ...input, hora: value.$H.toString() + "-" })} />
+                                        onChange={(value) => setInput({ ...input,   hora:value})} />
                                 </DemoContainer>
                             </LocalizationProvider>
                         </div>
 
-
-                        <TextField
-                            label="Telefono"
-                            id="outlined-size-small"
-                            size="small"
-                            value={input.telefono}
-                            onChange={changeValue}
-                            sx={{ marginBottom: "10px" }}
-                        />
                         <FormControl size="small">
                             <InputLabel id="demo-select-small-label">Tipo de mascota</InputLabel>
                             <Select
                                 labelId="demo-select-small-label"
-                                id="demo-select-small"
-                                label="Tipo"
+                                name="tipo"
+                                label="Tipo de mascota"
                                 color="primary"
                                 value={input.tipo}
                                 onChange={changeValue}
@@ -300,7 +295,7 @@ function Citas() {
                             </Select>
                         </FormControl>
                         <TextField
-                            id="outlined-multiline-static"
+                            name="sintomas"
                             label="Sintomas"
                             multiline
                             value={input.sintomas}
