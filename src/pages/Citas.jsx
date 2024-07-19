@@ -32,11 +32,11 @@ import Gato from "../images/gato.gif"
 import Cabra from "../images/cabra.gif"
 
 dayjs.extend(utc)
-console.log(dayjs("2024-04-17T15:00").hour()+":"+dayjs("2024-04-17T15:30").minute());
+console.log(dayjs("2024-04-17T15:00").hour()+":"+dayjs("2024-04-17T15:30").minute()+":00");
 
 function Citas() {
     const [datos, setDatos] = useState([
-        { mascota: "Koki", estado: 0, propietario: "Mario", sintomas: "Dolor en el lomo", fecha: "2024-11-25", hora: dayjs("2024-04-17T15:00").hour()+":"+dayjs("2024-04-17T15:30").minute(), tipo: Iguana, telefono: 3882255664 },
+        { mascota: "Koki", estado: 0, propietario: "Mario", sintomas: "Dolor en el lomo", fecha: "2024-11-25", hora: dayjs("2024-04-17T15:00").hour()+":"+dayjs("2024-04-17T15:30").minute()+":00", tipo: Iguana, telefono: 3882255664 },
         { mascota: "Muñeca", estado: 0, propietario: "Mario", sintomas: "Dolor en el lomo", fecha: "2024-11-25", hora: dayjs("2024-04-17T08:00").hour(), tipo: Perro, telefono: 3882255664 },
         { mascota: "Ratatuil", estado: 1, propietario: "Mario", sintomas: "Dolor en el lomo", fecha: "2024-11-25", hora: dayjs("2024-04-17T08:00").hour(), tipo: Gato, telefono: 3882255664 },
         { mascota: "Thor", estado: 0, propietario: "Mario", sintomas: "Sin pico", fecha: "2024-11-25", hora: dayjs("2024-04-17T08:00").hour(), tipo: Loro, telefono: 3882255664 },
@@ -112,9 +112,14 @@ function Citas() {
             setError("Por favor digite seleccione el tipo de mascota")
         }else if (!input.fecha){
             setOpenAlert(true)
-            setError("Por favor digite el nombre del propietario")
-        }
+            setError("Por favor seleccione la fecha")
+        }else if (!input.hora){
+            setOpenAlert(true)
+            setError("Por favor seleccione la hora")
+    }else{
+        saveData()
     }
+}
 
     return (
         <div id='citas'>
@@ -253,7 +258,7 @@ function Citas() {
                             <LocalizationProvider dateAdapter={AdapterDayjs}>
                                 <DemoContainer components={['TimePicker']} sx={{ margin: "10px 0", marginLeft: "10px", padding: "10px" }}>
                                     <TimePicker label="Basic time picker" id="hora" value={input.hora} 
-                                        minTime={dayjs().set('hour', 18).startOf('hour')}
+                                         
                                         onChange={(value) => setInput({ ...input, hora: value.$H.toString() + "-" })} />
                                 </DemoContainer>
                             </LocalizationProvider>
