@@ -35,24 +35,27 @@ dayjs.extend(utc)
 
 function Citas() {
     const [datos, setDatos] = useState([
-        { mascota: "Koki", estado: 0, propietario: "Mario", sintomas: "Dolor en el lomo", fecha: "2024-11-25", hora: dayjs("2024-04-17T15:00").hour()+":"+dayjs("2024-04-17T15:30").minute()+":00", tipo: Iguana, telefono: 3882255664 },
-        { mascota: "Muñeca", estado: 0, propietario: "Mario", sintomas: "Dolor en el lomo", fecha: "2024-11-25", hora: dayjs("2024-04-17T08:00").hour(), tipo: Perro, telefono: 3882255664 },
-        { mascota: "Ratatuil", estado: 1, propietario: "Mario", sintomas: "Dolor en el lomo", fecha: "2024-11-25", hora: dayjs("2024-04-17T08:00").hour(), tipo: Gato, telefono: 3882255664 },
-        { mascota: "Thor", estado: 0, propietario: "Mario", sintomas: "Sin pico", fecha: "2024-11-25", hora: dayjs("2024-04-17T08:00").hour(), tipo: Loro, telefono: 3882255664 },
-        { mascota: "Koki", estado: 1, propietario: "Mario", sintomas: "Dolor en el lomo", fecha: "2024-11-25", hora: dayjs("2024-04-17T08:00").hour(), tipo: Cabra, telefono: 3882255664 },
-        { mascota: "Muñeca", estado: 2, propietario: "Mario", sintomas: "Dolor en el lomo", fecha: "2024-11-25", hora: dayjs("2024-04-17T08:00").hour(), tipo: Perro, telefono: 3882255664 },
-        { mascota: "Ratatuil", estado: 0, propietario: "Mario", sintomas: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad hic aperiam alias, at sequi optio ipsa doloribus repellat officiis nostrum asperiores excepturi dolor quidem voluptatibus ea dolores repudiandae tempora aliquam. ", fecha: "2024-11-25", hora: dayjs("2024-04-17T08:00").hour(), tipo: Iguana, telefono: 3882255664 },
-        { mascota: "Thor", estado: 1, propietario: "Mario", sintomas: "Sin pico", fecha: "2024-11-25", hora: dayjs("2024-04-17T08:00").hour(), tipo: Loro, telefono: 3882255664 },
+        /*  { mascota: "Koki", estado: 0, propietario: "Mario", sintomas: "Dolor en el lomo", fecha: "2024-11-25", hora: dayjs("2024-04-17T15:00").hour()+":"+dayjs("2024-04-17T15:30").minute()+":00", tipo: Iguana, telefono: 3882255664 },
+         { mascota: "Muñeca", estado: 0, propietario: "Mario", sintomas: "Dolor en el lomo", fecha: "2024-11-25", hora: dayjs("2024-04-17T08:00").hour(), tipo: Perro, telefono: 3882255664 },
+         { mascota: "Ratatuil", estado: 1, propietario: "Mario", sintomas: "Dolor en el lomo", fecha: "2024-11-25", hora: dayjs("2024-04-17T08:00").hour(), tipo: Gato, telefono: 3882255664 },
+         { mascota: "Thor", estado: 0, propietario: "Mario", sintomas: "Sin pico", fecha: "2024-11-25", hora: dayjs("2024-04-17T08:00").hour(), tipo: Loro, telefono: 3882255664 },
+         { mascota: "Koki", estado: 1, propietario: "Mario", sintomas: "Dolor en el lomo", fecha: "2024-11-25", hora: dayjs("2024-04-17T08:00").hour(), tipo: Cabra, telefono: 3882255664 },
+         { mascota: "Muñeca", estado: 2, propietario: "Mario", sintomas: "Dolor en el lomo", fecha: "2024-11-25", hora: dayjs("2024-04-17T08:00").hour(), tipo: Perro, telefono: 3882255664 },
+         { mascota: "Ratatuil", estado: 0, propietario: "Mario", sintomas: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad hic aperiam alias, at sequi optio ipsa doloribus repellat officiis nostrum asperiores excepturi dolor quidem voluptatibus ea dolores repudiandae tempora aliquam. ", fecha: "2024-11-25", hora: dayjs("2024-04-17T08:00").hour(), tipo: Iguana, telefono: 3882255664 }, 
+         { mascota: "Thor", estado: 1, propietario: "Mario", sintomas: "Sin pico", fecha: "2024-11-25", hora: dayjs("2024-04-17T08:00").hour(), tipo: Loro, telefono: 3882255664 },*/
     ])
 
     console.log(datos);
 
     const [open, setOpen] = useState(false);
     const [openAlert, setOpenAlert] = useState(false);
+    const [openAlert2, setOpenAlert2] = useState(false);
     const [error, setError] = useState("")
     const [bd, setBd] = useState(false);
-    const [input, setInput] = useState({ mascota: "", estado: 0, propietario: "", sintomas: "", fecha: "", hora: "", tipo: "No aplica", telefono: 0 });
-
+    const [input, setInput] = useState({ mascota: "", estado: 0, propietario: "", sintomas: "", fecha: dayjs().add(1, 'day'), hora: dayjs('2022-04-17T15:30'), tipo: "No aplica", telefono: 0 });
+    const [id, setId] = useState(null);
+    const [estado, setEstado] = useState("0");
+    const [filteredDatos, setFilteredDatos] = useState(datos);
 
 
     const changeValue = (e) => {
@@ -65,65 +68,107 @@ function Citas() {
     }
 
 
-    const handleClickOpen = (e, b) => {
+    const handleClickOpen = (e, b, i) => {
         setOpen(true);
-        console.log(bd);
+        setId(i)
+        console.log(e.mascota);
         if (b == true) {
-            console.log(e.hora);
-            setInput({ mascota: e.mascota, propietario: e.propietario, telefono: e.telefono, fecha: dayjs(e.fecha), hora: dayjs(e.hora), tipo: e.tipo, sintomas: e.sintomas })
+            setInput({
+                mascota: e.mascota, propietario: e.propietario, telefono: e.telefono,
+                fecha: e.fecha,
+                hora: e.hora,
+                tipo: e.tipo, sintomas: e.sintomas
+            })
             setBd(b)
         }
-        setBd(false)
         console.log(input);
     };
 
     const handleClose = () => {
         setOpen(false);
-        setInput({ mascota: "", estado: 0, propietario: "", sintomas: "", fecha: dayjs(dayjs().add(1, 'day')), hora: dayjs('2024-04-17T08:20'), tipo: "No aplica", telefono: 0 })
+        setInput({ mascota: "", estado: 0, propietario: "", sintomas: "", fecha: dayjs().add(1, 'day'), hora: dayjs().add(1, 'day'), tipo: "No aplica", telefono: 0 })
     };
 
-    const handleClose2=()=>{
+    const handleClose2 = () => {
         setOpenAlert(false)
     }
 
+    const handleClose3 = () => {
+        setOpenAlert2(false)
+    }
+
     const saveData = () => {
+        console.log(id);
         if (bd == false) {
             setDatos(
                 prevValue => [{
                     mascota: input.mascota, propietario: input.propietario, sintomas: input.sintomas,
                     fecha: input.fecha, hora: input.hora, estado: 0, tipo: input.tipo, telefono: input.telefono
-                },...prevValue] 
+                }, ...prevValue]
             )
+            handleClose()
+            setOpenAlert2(true)
+        } else {
+            datos[id].propietario = input.propietario
+            datos[id].mascota = input.mascota
+            datos[id].sintomas = input.sintomas
+            datos[id].fecha = input.fecha
+            datos[id].hora = input.hora
+            datos[id].tipo = input.tipo
+            datos[id].telefono = input.telefono
+            setDatos(datos)
+            handleClose()
+            setOpenAlert2(true)
+            setBd(false)
         }
+
+
     }
+
+    const cambiarEstado = (valor="", e="", i)=>{
+        console.log(e.estado!==valor.target?.value);
+       if (valor.target?.value!==e.estado){
+            let newDatos = [...datos] 
+            newDatos[i].estado = valor.target?.value
+            setDatos(newDatos)
+        } 
+    }
+
+
+    useEffect(()=>{
+        cambiarEstado(),
+        setFilteredDatos(
+            estado === "" ? datos : datos.filter(cita => cita.estado.toString() === estado)
+        );
+    }, [estado, datos])
 
 
     const validationData = () => {
         if (!input.mascota) {
             setOpenAlert(true)
             setError("Por favor digite el nombre de la mascota")
-        }else if (!input.propietario){
+        } else if (!input.propietario) {
             setOpenAlert(true)
             setError("Por favor digite el nombre del propietario")
-        }else if (!input.sintomas){
+        } else if (!input.sintomas) {
             setOpenAlert(true)
             setError("Por favor digite los sintomas")
-        }else if (!input.telefono){
+        } else if (!input.telefono) {
             setOpenAlert(true)
             setError("Por favor digite el telefono")
-        }else if (input.tipo=="No aplica" && !input.tipo){
+        } else if (input.tipo == "No aplica" && !input.tipo) {
             setOpenAlert(true)
             setError("Por favor digite seleccione el tipo de mascota")
-        }else if (!input.fecha){
+        } else if (!input.fecha) {
             setOpenAlert(true)
             setError("Por favor seleccione la fecha")
-        }else if (!input.hora){
+        } else if (!input.hora) {
             setOpenAlert(true)
             setError("Por favor seleccione la hora")
-    }else{
-        saveData()
+        } else {
+            saveData()
+        }
     }
-}
 
     return (
         <div id='citas'>
@@ -131,7 +176,25 @@ function Citas() {
                 <h1>Administardor de citas</h1>
             </div>
             <div className='btnAdd'>
-                <Button variant="outlined" size="large" color="success" onClick={handleClickOpen}>
+                <FormControl sx={{ width: "25%", textAlign:"center"}}>
+                    <InputLabel id="demo-select-small-label">Filtrar por estado</InputLabel>
+                    <Select
+                        labelId="demo-select-small-label"
+                        id="demo-select-small"
+                        label="Filtrar por estado"
+                        color="primary"
+                        value={estado}
+                        onChange={(value) => setEstado(value.target.value)}
+                    >
+                        <MenuItem value="0">
+                            Abierta
+                        </MenuItem>
+                        <MenuItem value="1">Terminada</MenuItem>
+                        <MenuItem value="2">Anulada</MenuItem>
+
+                    </Select>
+                </FormControl>
+                <Button variant="outlined"  color="success" onClick={handleClickOpen}>
                     Agregar cita
                 </Button>
             </div>
@@ -139,7 +202,7 @@ function Citas() {
                 <hr id='titulo' />
             </div>
             <div className='fila3'>
-                <div className='filtro'>
+                {/* <div className='filtro'>
                     <input style={{ margin: "40px 15px", height: "20px", width: "20px" }} type="radio" id="abierta" name="estado" value="HTML"></input>
                     <label htmlFor="abierta">Abiertas</label><br></br>
                     <hr />
@@ -148,10 +211,10 @@ function Citas() {
                     <hr />
                     <input style={{ margin: "40px 15px", height: "20px", width: "20px" }} type="radio" id="anulada" name="estado" value="JavaScript"></input>
                     <label htmlFor="anulada">Anuladas</label>
-                </div>
+                </div> */}
                 <div className='cards'>
                     {
-                        datos.map((e, i) => {
+                        filteredDatos.map((e, i) => {
                             return <Card key={i} sx={{ textAlign: "center", position: "relative", overflow: "visible" }}>
                                 <img style={{ height: "70px", width: "70px", position: "absolute", top: "-35px", right: "10%" }} src={e.tipo} alt="" />
                                 <CardContent>
@@ -164,8 +227,8 @@ function Citas() {
                                     <Typography sx={{ textAlign: "justify" }} gutterBottom variant="body1" component="div">
                                         Telefono: {e.telefono}
                                     </Typography>
-                                    <Typography sx={{ textAlign: "justify" }} gutterBottom variant="body1" component="div">
-                                        Fecha: {dayjs(e.fecha).day().toString().padStart(2,"0")+"-"+dayjs(e.fecha).month().toString().padStart(2,"0")+"-"+dayjs(e.fecha).year()} Hora: {dayjs(e.hora).hour().toString().padStart(2,"0")+":"+dayjs(e.hora).minute().toString().padStart(2,"0")+":"+dayjs(e.hora).second().toString().padStart(2,"0")}
+                                    <Typography sx={{ textAlign: "left" }} gutterBottom variant="body1" component="div">
+                                        Fecha: {e.fecha.$D + " - " } {parseInt(e.fecha.$M) +1} {" - " + e.fecha.$y}  Hora: {dayjs(e.hora).hour().toString().padStart(2, "0") + ":" + dayjs(e.hora).minute().toString().padStart(2, "0") + ":" + dayjs(e.hora).second().toString().padStart(2, "0")}
                                     </Typography>
 
                                     <Typography sx={{ textAlign: "justify" }} variant="body2" color="text.secondary">
@@ -181,19 +244,19 @@ function Citas() {
                                                 color="primary"
                                                 value={e.estado}
                                                 sx={{ marginBottom: "35px" }}
+                                                onChange={(value) => cambiarEstado(value, e, i)}
                                             >
-                                                <MenuItem value={0} >
+                                                <MenuItem value="0">
                                                     Abierta
                                                 </MenuItem>
-                                                <MenuItem value={1}>Terminada</MenuItem>
-                                                <MenuItem value={2}>Anulada</MenuItem>
-
+                                                <MenuItem value="1">Terminada</MenuItem>
+                                                <MenuItem value="2">Anulada</MenuItem>
                                             </Select>
                                         </FormControl>
                                     </div>
                                 </CardContent>
                                 <CardActions sx={{ display: "flex", justifyContent: "end", position: "absolute", bottom: "0", right: "0" }}>
-                                    <Button variant='outlined' size="small" onClick={() => { handleClickOpen(e, true) }}>📝</Button>
+                                    <Button variant='outlined' size="small" onClick={() => { handleClickOpen(e, true, i) }}>📝</Button>
                                     <Button variant='outlined' color='error' size="small">❌</Button>
                                 </CardActions>
                             </Card>
@@ -254,16 +317,16 @@ function Citas() {
                                         label="Fecha de cita"
                                         minDate={dayjs().add(1, 'day')}
                                         id="fecha"
-                                        
+                                        value={input.fecha}
                                         onChange={(value) => setInput({ ...input, fecha: value })}
                                     />
                                 </DemoContainer>
                             </LocalizationProvider>
                             <LocalizationProvider dateAdapter={AdapterDayjs}>
                                 <DemoContainer components={['TimePicker']} sx={{ margin: "10px 0", marginLeft: "10px", padding: "10px" }}>
-                                    <TimePicker label="Basic time picker" id="hora"  
-                                         
-                                        onChange={(value) => setInput({ ...input,   hora:value})} />
+                                    <TimePicker label="Basic time picker" id="hora"
+                                        value={input.hora}
+                                        onChange={(value) => setInput({ ...input, hora: value })} />
                                 </DemoContainer>
                             </LocalizationProvider>
                         </div>
@@ -307,22 +370,40 @@ function Citas() {
 
                 </DialogContent>
                 <DialogActions>
-                    <Button variant='outlined' color="success" onClick={handleClose}>Cerrar</Button>
-                    <Button variant='outlined' color="error" autoFocus onClick={validationData}>
+                    <Button variant='outlined' color="error"  onClick={handleClose}>Cerrar</Button>
+                    <Button variant='outlined' color="success" autoFocus onClick={validationData}>
                         Guardar
                     </Button>
                 </DialogActions>
             </Dialog>
-            <Snackbar open={openAlert} autoHideDuration={3000} onClose={handleClose2} anchorOrigin={{ vertical: 'top',
-                        horizontal: 'right'}}>
+            <Snackbar open={openAlert} autoHideDuration={3000} onClose={handleClose2} anchorOrigin={{
+                vertical: 'top',
+                horizontal: 'right'
+            }}>
+
                 <Alert
                     onClose={handleClose2}
                     severity="error"
                     variant="filled"
                     sx={{ width: '100%' }}
-                    
+
                 >
                     {error}
+                </Alert>
+            </Snackbar>
+            <Snackbar open={openAlert2} autoHideDuration={3000} onClose={handleClose3} anchorOrigin={{
+                vertical: 'top',
+                horizontal: 'right'
+            }}>
+
+                <Alert
+                    onClose={handleClose3}
+                    severity="success"
+                    variant="filled"
+                    sx={{ width: '100%' }}
+
+                >
+                    Registro exitoso
                 </Alert>
             </Snackbar>
         </div>
