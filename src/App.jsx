@@ -13,7 +13,7 @@ export default function App() {
         <Route path="/pokedex" element={<Pokedex/>}/>
         <Route path="/citas" element={<Citas/>}/>
         <Route element={<Bebidas/>}>
-          <Route path="/favoritos" element={<Favoritos/>} index/>
+          <Route path="/bebidas" element={<Favoritos/>} index/>
         </Route>
       </Routes>
     </BrowserRouter>
