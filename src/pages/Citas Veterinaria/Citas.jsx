@@ -25,11 +25,11 @@ import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
 import dayjs from 'dayjs';
 import utc from 'dayjs/plugin/utc';
-import Iguana from "../images/iguana.png"
-import Loro from "../images/loro.png"
-import Perro from "../images/perro.png"
-import Gato from "../images/gato.gif"
-import Cabra from "../images/cabra.gif"
+import Iguana from "../../images/iguana.png"
+import Loro from "../../images/loro.png"
+import Perro from "../../images/perro.png"
+import Gato from "../../images/gato.gif"
+import Cabra from "../../images/cabra.gif"
 
 dayjs.extend(utc)
 

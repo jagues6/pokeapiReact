@@ -1,6 +1,6 @@
 import {BrowserRouter, Route, Routes} from "react-router-dom"
-import {Pokedex} from "./pages/Pokedex.jsx"
-import Citas from "./pages/Citas.jsx"
+import {Pokedex} from "./pages/Pokedex/Pokedex.jsx"
+import Citas from "./pages/Citas Veterinaria/Citas.jsx"
 import Home from "./pages/Home.jsx"
 import Bebidas from "./pages/Buscador de bebidas/Header.jsx"
 import Favoritos from "./pages/Buscador de bebidas/Favoritos.jsx"

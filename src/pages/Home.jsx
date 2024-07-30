@@ -9,7 +9,7 @@ export default function Home() {
     return (
         <>
             <div style={{ backgroundColor: '#3b5998' }}>
-                <h1 style={{ textAlign: 'center', color: "white", fontFamily: "Helvetica", marginTop:"20px" }}>Bienvenidos a proyectos Javascript</h1>
+                <h1 style={{ textAlign: 'center', color: "white", fontFamily: "Helvetica", marginTop:"20px" }}>Bienvenidos a proyectos React</h1>
             </div>
             <div className="home">
                 <div className="col">
