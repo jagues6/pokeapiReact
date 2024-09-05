@@ -26,7 +26,7 @@ export default function Home() {
                         <h2 style={{ textAlign: 'center', margin: "10px", color: "white" }}>Carrito de compras</h2>
                     </div>
                     <img className="homeBebidas" src={homeCarrito} alt="" />
-                    <Link to="/pokedex" style={{ margin: "20px 0" }}>
+                    <Link to="/carrito" style={{ margin: "20px 0" }}>
                         <Button variant="outlined">Carrito</Button>
                     </Link>
                 </div>
