@@ -69,7 +69,7 @@ export default function Favoritos() {
   }, [])
 
   return (
-    <div style={{ textAlign:"center"}}>
+    <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
       <div style={{ display: "flex", justifyContent: "center" }}>
         <h1>Bebidas al azar</h1>
       </div>
