@@ -253,6 +253,14 @@ button{
   align-items: center;
 }
 
+.cardBebidas1{
+  display:grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap:10px;
+  align-items: center;
+  width: 70%;
+}
+
 .bebida{
   margin-top:20px;
   display: flex;

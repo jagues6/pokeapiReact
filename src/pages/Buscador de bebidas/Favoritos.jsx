@@ -18,7 +18,7 @@ export default function Favoritos() {
   const [ordinarias, setOrdinarias] = useState([])
 
   const listarBebidasRandom = async () => {
-    for (let i = 0; i < 4; i++) {
+    for (let i = 0; i < 3; i++) {
       try {
         let res = await axios.get("https://www.thecocktaildb.com/api/json/v1/1/random.php")
         //console.log(res.data.drinks[0]);
@@ -69,11 +69,11 @@ export default function Favoritos() {
   }, [])
 
   return (
-    <div>
+    <div style={{ textAlign:"center"}}>
       <div style={{ display: "flex", justifyContent: "center" }}>
         <h1>Bebidas al azar</h1>
       </div>
-      <div className="cardBebidas">
+      <div className="cardBebidas1">
         {
           bebidasRandon.map((e, i) => {
             return <div className="bebida" key={i}>
