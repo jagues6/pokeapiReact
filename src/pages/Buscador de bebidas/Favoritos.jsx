@@ -15,6 +15,7 @@ export default function Favoritos() {
 
   const [bebidasRandon, setBebidasRandom] = useState([])
   const [cocteles, setCocteles] = useState([])
+  const [ordinarias, setOrdinarias] = useState([])
 
   const listarBebidasRandom = async () => {
     for (let i = 0; i < 4; i++) {
@@ -32,28 +33,44 @@ export default function Favoritos() {
   }
 
   const listarCocteles = async () => {
-      try {
-        let res = await axios.get("https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=Cocktail")
-        console.log(res.data.drinks);
-        for (let i= 0; i<4;i++){
-          setCocteles(prev => [...prev, res.data.drinks[i]])
-        }
-        console.log(cocteles);
-
-      } catch (error) {
-        throw new Error("Hubo un error", error);
+    try {
+      let res = await axios.get("https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=Cocktail")
+      console.log(res.data.drinks);
+      for (let i = 0; i < 4; i++) {
+        setCocteles(prev => [...prev, res.data.drinks[i]])
       }
+      console.log(cocteles);
+    } catch (error) {
+      throw new Error("Hubo un error", error);
+    }
+  }
+
+  const listarBebidasOrdinarias = async () => {
+    try {
+      let res = await axios.get("https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=Ordinary Drink")
+      console.log(res.data.drinks);
+      for (let i = 0; i < 4; i++) {
+        setOrdinarias(prev => [...prev, res.data.drinks[i]])
+      }
+      console.log(cocteles);
+
+    } catch (error) {
+      throw new Error("Hubo un error", error);
+    }
 
   }
+
+
 
   useEffect(() => {
     listarBebidasRandom()
     listarCocteles()
+    listarBebidasOrdinarias()
   }, [])
 
   return (
     <div>
-      <div style={{display:"flex", justifyContent: "center"}}>
+      <div style={{ display: "flex", justifyContent: "center" }}>
         <h1>Bebidas al azar</h1>
       </div>
       <div className="cardBebidas">
@@ -75,7 +92,7 @@ export default function Favoritos() {
                   title={e.strDrink}
                   subheader={e.strCategory}
                 />
-                <CardMedia 
+                <CardMedia
                   component="img"
                   sx={{ height: "100%", width: "100%" }}
                   image={e.strDrinkThumb}
@@ -94,47 +111,89 @@ export default function Favoritos() {
           })
         }
       </div>
-      <div style={{display:"flex", justifyContent: "center"}}>
+      <div style={{ display: "flex", justifyContent: "center" }}>
         <h1>Cocteleria</h1>
       </div>
       <div>
-      <div className="cardBebidas">
-        {
-          cocteles.map((e, i) => {
-            return <div className="bebida" key={i}>
-              <Card sx={{ maxWidth: 345 }}>
-                <CardHeader
-                  avatar={
-                    <Avatar sx={{ bgcolor: "blue", width:"100%" }} aria-label="recipe" >
-                      {e.idDrink}
-                    </Avatar>
-                  }
-                  action={
-                    <IconButton aria-label="settings">
-                      <MoreVertIcon />
+        <div className="cardBebidas">
+          {
+            cocteles.map((e, i) => {
+              return <div className="bebida" key={i}>
+                <Card sx={{ maxWidth: 345 }}>
+                  <CardHeader
+                    avatar={
+                      <Avatar sx={{ bgcolor: "blue", width: "100%" }} aria-label="recipe" >
+                        {e.idDrink}
+                      </Avatar>
+                    }
+                    action={
+                      <IconButton aria-label="settings">
+                        <MoreVertIcon />
+                      </IconButton>
+                    }
+                    title={e.strDrink}
+                  />
+                  <CardMedia
+                    component="img"
+                    sx={{ height: "100%", width: "100%" }}
+                    image={e.strDrinkThumb}
+                    alt="Paella dish"
+                  />
+                  <CardActions disableSpacing>
+                    <IconButton aria-label="add to favorites">
+                      <FavoriteIcon />
                     </IconButton>
-                  }
-                  title={e.strDrink}
-                />
-                <CardMedia 
-                  component="img"
-                  sx={{ height: "100%", width: "100%" }}
-                  image={e.strDrinkThumb}
-                  alt="Paella dish"
-                />
-                <CardActions disableSpacing>
-                  <IconButton aria-label="add to favorites">
-                    <FavoriteIcon />
-                  </IconButton>
-                  <IconButton aria-label="share">
-                    <ShareIcon />
-                  </IconButton>
-                </CardActions>
-              </Card>
-            </div>
-          })
-        }
+                    <IconButton aria-label="share">
+                      <ShareIcon />
+                    </IconButton>
+                  </CardActions>
+                </Card>
+              </div>
+            })
+          }
+        </div>
       </div>
+      <div style={{ display: "flex", justifyContent: "center" }}>
+        <h1>Bebidas ordinarias</h1>
+      </div>
+      <div>
+        <div className="cardBebidas">
+          {
+            ordinarias.map((e, i) => {
+              return <div className="bebida" key={i}>
+                <Card sx={{ maxWidth: 345 }}>
+                  <CardHeader
+                    avatar={
+                      <Avatar sx={{ bgcolor: "blue", width: "100%" }} aria-label="recipe" >
+                        {e.idDrink}
+                      </Avatar>
+                    }
+                    action={
+                      <IconButton aria-label="settings">
+                        <MoreVertIcon />
+                      </IconButton>
+                    }
+                    title={e.strDrink}
+                  />
+                  <CardMedia
+                    component="img"
+                    sx={{ height: "100%", width: "100%" }}
+                    image={e.strDrinkThumb}
+                    alt="Paella dish"
+                  />
+                  <CardActions disableSpacing>
+                    <IconButton aria-label="add to favorites">
+                      <FavoriteIcon />
+                    </IconButton>
+                    <IconButton aria-label="share">
+                      <ShareIcon />
+                    </IconButton>
+                  </CardActions>
+                </Card>
+              </div>
+            })
+          }
+        </div>
       </div>
     </div>
   )
