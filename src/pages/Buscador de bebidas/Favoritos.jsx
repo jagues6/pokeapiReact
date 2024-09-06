@@ -1,14 +1,11 @@
 import { useEffect, useState } from "react"
 import axios from "axios"
-
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
 import CardMedia from '@mui/material/CardMedia';
-import CardContent from '@mui/material/CardContent';
 import CardActions from '@mui/material/CardActions';
 import Avatar from '@mui/material/Avatar';
 import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
 import { red } from '@mui/material/colors';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import ShareIcon from '@mui/icons-material/Share';
@@ -17,9 +14,10 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 export default function Favoritos() {
 
   const [bebidasRandon, setBebidasRandom] = useState([])
+  const [cocteles, setCocteles] = useState([])
 
   const listarBebidasRandom = async () => {
-    for (let i = 0; i < 2; i++) {
+    for (let i = 0; i < 4; i++) {
       try {
         let res = await axios.get("https://www.thecocktaildb.com/api/json/v1/1/random.php")
         //console.log(res.data.drinks[0]);
@@ -33,8 +31,24 @@ export default function Favoritos() {
 
   }
 
+  const listarCocteles = async () => {
+      try {
+        let res = await axios.get("https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=Cocktail")
+        console.log(res.data.drinks);
+        for (let i= 0; i<4;i++){
+          setCocteles(prev => [...prev, res.data.drinks[i]])
+        }
+        console.log(cocteles);
+
+      } catch (error) {
+        throw new Error("Hubo un error", error);
+      }
+
+  }
+
   useEffect(() => {
     listarBebidasRandom()
+    listarCocteles()
   }, [])
 
   return (
@@ -81,7 +95,46 @@ export default function Favoritos() {
         }
       </div>
       <div style={{display:"flex", justifyContent: "center"}}>
-        <h1>Bebidas al azar</h1>
+        <h1>Cocteleria</h1>
+      </div>
+      <div>
+      <div className="cardBebidas">
+        {
+          cocteles.map((e, i) => {
+            return <div className="bebida" key={i}>
+              <Card sx={{ maxWidth: 345 }}>
+                <CardHeader
+                  avatar={
+                    <Avatar sx={{ bgcolor: "blue", width:"100%" }} aria-label="recipe" >
+                      {e.idDrink}
+                    </Avatar>
+                  }
+                  action={
+                    <IconButton aria-label="settings">
+                      <MoreVertIcon />
+                    </IconButton>
+                  }
+                  title={e.strDrink}
+                />
+                <CardMedia 
+                  component="img"
+                  sx={{ height: "100%", width: "100%" }}
+                  image={e.strDrinkThumb}
+                  alt="Paella dish"
+                />
+                <CardActions disableSpacing>
+                  <IconButton aria-label="add to favorites">
+                    <FavoriteIcon />
+                  </IconButton>
+                  <IconButton aria-label="share">
+                    <ShareIcon />
+                  </IconButton>
+                </CardActions>
+              </Card>
+            </div>
+          })
+        }
+      </div>
       </div>
     </div>
   )
