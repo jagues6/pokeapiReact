@@ -125,7 +125,7 @@ export default function Favoritos() {
               {
                 bebidasRandon.map((e, i) => {
                   return <div className="bebida" key={i}>
-                    <Card sx={{ maxWidth: 345 }}>
+                    <Card sx={{ maxWidth: 300 }}>
                       <CardHeader
                         avatar={
                           <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
@@ -169,7 +169,7 @@ export default function Favoritos() {
           {
             cocteles.map((e, i) => {
               return <div className="bebida" key={i}>
-                <Card sx={{ maxWidth: 345 }}>
+                <Card sx={{ maxWidth: 300 }}>
                   <CardHeader
                     avatar={
                       <Avatar sx={{ bgcolor: "blue", width: "100%" }} aria-label="recipe" >
@@ -211,7 +211,7 @@ export default function Favoritos() {
           {
             ordinarias.map((e, i) => {
               return <div className="bebida" key={i}>
-                <Card sx={{ maxWidth: 345 }}>
+                <Card sx={{ maxWidth: 300 }}>
                   <CardHeader
                     avatar={
                       <Avatar sx={{ bgcolor: "blue", width: "100%" }} aria-label="recipe" >
