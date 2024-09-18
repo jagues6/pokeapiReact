@@ -1,7 +1,11 @@
-
+import Banner from "../../../public/bg.jpg"
 
 export const Buscador = () => {
   return (
-    <div>Buscador</div>
+    <div>
+      <div>
+       
+      </div>
+    </div>
   )
 }
