@@ -291,7 +291,8 @@ function Citas() {
                             size="small"
                             value={input.mascota}
                             onChange={changeValue}
-                            sx={{ marginBottom: "10px", marginTop: "20px",  }}
+                            sx={{ marginBottom: "10px", marginTop: "20px" }}
+                            className='caja'
                         />
                         <TextField
                             label="Propietario"
@@ -300,6 +301,7 @@ function Citas() {
                             value={input.propietario}
                             onChange={changeValue}
                             sx={{ marginBottom: "10px" }}
+                            className='caja'
                         />
 
                         <TextField
@@ -308,12 +310,14 @@ function Citas() {
                             size="small"
                             value={input.telefono}
                             onChange={changeValue}
-                            sx={{ marginBottom: "0px" }}
+                            sx={{ marginBottom: "10px" }}
+                            className='caja'
                         />
-                        <div style={{ display: "flex" }}>
+                        <div className='fecha' style={{ display: "flex", gap:"10px", marginBottom: "20px" }}>
                             <LocalizationProvider dateAdapter={AdapterDayjs}>
-                                <DemoContainer components={['DatePicker']} sx={{ margin: "10px 0", padding: "10px" }}>
+                                <DemoContainer  components={['DatePicker']} sx={{  }}>
                                     <DatePicker
+                                    className='caja'
                                         label="Fecha de cita"
                                         minDate={dayjs().add(1, 'day')}
                                         id="fecha"
@@ -323,8 +327,8 @@ function Citas() {
                                 </DemoContainer>
                             </LocalizationProvider>
                             <LocalizationProvider dateAdapter={AdapterDayjs}>
-                                <DemoContainer components={['TimePicker']} sx={{ margin: "10px 0", marginLeft: "10px", padding: "10px" }}>
-                                    <TimePicker label="Basic time picker" id="hora"
+                                <DemoContainer className='caja' components={['TimePicker']} sx={{  }}>
+                                    <TimePicker label="Basic time picker" id="hora" className='caja'
                                         value={input.hora}
                                         onChange={(value) => setInput({ ...input, hora: value })} />
                                 </DemoContainer>
@@ -341,6 +345,7 @@ function Citas() {
                                 value={input.tipo}
                                 onChange={changeValue}
                                 sx={{ marginBottom: "10px" }}
+                                className='caja'
                             >
                                 <MenuItem value="No aplica">
                                     <em>No aplica</em>
@@ -365,6 +370,7 @@ function Citas() {
                             onChange={changeValue}
                             rows={4}
                             sx={{ marginBottom: "10px" }}
+                            className='caja'
                         />
                     </div>
 

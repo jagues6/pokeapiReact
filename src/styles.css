@@ -184,8 +184,14 @@ button{
   }
 
   @media (max-width: 500px){
-   .formulario > TextField{
-      width: 50%;
+  
+
+   .formulario{
+    width: 100%;
+   }
+   
+   .fecha{
+    flex-direction: column;
    }
   }
 
