@@ -291,7 +291,7 @@ function Citas() {
                             size="small"
                             value={input.mascota}
                             onChange={changeValue}
-                            sx={{ marginBottom: "10px", marginTop: "20px" }}
+                            sx={{ marginBottom: "10px", marginTop: "20px",  }}
                         />
                         <TextField
                             label="Propietario"
