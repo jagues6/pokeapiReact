@@ -275,7 +275,7 @@ function Citas() {
                 onClose={handleClose}
                 aria-labelledby="alert-dialog-title"
                 aria-describedby="alert-dialog-description"
-
+                className='dialogo'
             >
                 <DialogTitle id="alert-dialog-title" sx={{ backgroundColor: "green" }}>
                     <div style={{ display: "flex", flexDirection: "row", justifyContent: "space-between", alignItems: "center" }}>
