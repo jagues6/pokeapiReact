@@ -312,6 +312,16 @@ button{
   align-items: center;
 }
 
+@media (max-width: 500px){
+  .cardBebidas{
+    grid-template-columns:  1fr;
+  }
+
+  .cardBebidas1{
+    grid-template-columns:  1fr;
+  }
+}
+
 /* Estilos pantalla de buscador en  buscador de bebidas */
 
 .banner {
