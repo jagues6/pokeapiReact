@@ -1,91 +1,91 @@
 /* Estilos de la pantalla de pokedex */
 
-body{
-    margin: 0 !important;
+body {
+  margin: 0 !important;
 }
 
-button{
-    padding:10px;
-    font-size:30px;
-    margin-bottom:10px;
+button {
+  padding: 10px;
+  font-size: 30px;
+  margin-bottom: 10px;
 }
 
-#hijo{
-    display: grid;
-    grid-template-columns: 2fr 1fr;
-    align-items: center;
-    justify-content: center;
+#hijo {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+@media (max-width: 600px) {
+  #card {
+    grid-template-columns: 1fr !important;
     margin-top: 10px;
-}
+  }
 
-@media (max-width: 600px){
-    #card{
-        grid-template-columns: 1fr !important;
-        margin-top:10px;
-    }
-
-    .pok{
-        height: 50px !important;
-        width: 100px !important;
-    }
+  .pok {
+    height: 50px !important;
+    width: 100px !important;
+  }
 
 }
 
-@media (max-width: 400px){
+@media (max-width: 400px) {
 
-    .pok{
-        height: 50px !important;
-        width: 100px !important;
-    }
+  .pok {
+    height: 50px !important;
+    width: 100px !important;
+  }
 
-    .tituloPok{
-        height: 70px !important;
-        width: 140px !important;
-    }
+  .tituloPok {
+    height: 70px !important;
+    width: 140px !important;
+  }
 
-    .fila3{
-        grid-template-columns: 1fr !important;
-    }
+  .fila3 {
+    grid-template-columns: 1fr !important;
+  }
 
-    .filtro > input{
-        height: 10px;
-        width: 10px;
-        margin: 20px 15px !important;
-    }
+  .filtro>input {
+    height: 10px;
+    width: 10px;
+    margin: 20px 15px !important;
+  }
 
-    .filtro > label{
-        font-size: 20px;
-    }
+  .filtro>label {
+    font-size: 20px;
+  }
 
-    .home{
-        grid-template-columns: 1fr ;
-    }
+  .home {
+    grid-template-columns: 1fr;
+  }
 }
 
 
-@media  screen and (max-width: 1000px){
-    #hijo{
-        grid-template-columns: 1fr;
-    }
+@media screen and (max-width: 1000px) {
+  #hijo {
+    grid-template-columns: 1fr;
+  }
 
 }
 
-@media (max-width: 900px){
-    .home{
-        grid-template-columns: 1fr 1fr;
+@media (max-width: 900px) {
+  .home {
+    grid-template-columns: 1fr 1fr;
+  }
 }
-}
 
-@media (max-width: 1200px){
-    #tiposPokemon > h1{
-        font-size:30px !important;
-    }
+@media (max-width: 1200px) {
+  #tiposPokemon>h1 {
+    font-size: 30px !important;
+  }
 
-    #debPokemon > h1{
-        font-size:30px !important;
-    }
+  #debPokemon>h1 {
+    font-size: 30px !important;
+  }
 
-    
+
 }
 
 
@@ -95,139 +95,139 @@ button{
     min-height: 100%;
     position: relative;
   } */
-  
 
-  
-  #contenedor{
-    display: grid;
-    justify-content: center;
-    align-items: center;
-  }
 
-  #citas{
-    margin: 0 15px
-  }
-  
-  #titulo{
-    height: 10px;
-    width: 70%;
-    background-color: green;
-  }
-  
-  .fila3{
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 20px;
-    padding-bottom: 60px;
-    z-index: 100;
-  }
-  
-  .fila3 > div{
-    
-    margin: 0;
-  }
-  
-  label{
-    font-size: 30px;
-  }
-  
-  .filtro{
-    background-color:#7bd753;
-    border-radius: 10px;
-  }
 
-  .cards{
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 30px;
-    grid-auto-flow:row
-  }
+#contenedor {
+  display: grid;
+  justify-content: center;
+  align-items: center;
+}
 
-  .formulario{
-    display: flex;
-    flex-direction: column;
-    width: 500px;
-  }
+#citas {
+  margin: 0 15px
+}
 
-  
-  .btnAdd{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-right: 10px;
-    margin-bottom: 20px;
-  }
+#titulo {
+  height: 10px;
+  width: 70%;
+  background-color: green;
+}
 
-  #cerrar{
-    padding: 0px 10px;
-  }
+.fila3 {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+  padding-bottom: 60px;
+  z-index: 100;
+}
 
-  #cerrar:hover{
-    cursor: pointer;
-  }
-  
-  #footer{
-    height: 50px;
-    background-color: green;
-    position: fixed;
-    bottom: 0;
-    left: 0;
+.fila3>div {
+
+  margin: 0;
+}
+
+label {
+  font-size: 30px;
+}
+
+.filtro {
+  background-color: #7bd753;
+  border-radius: 10px;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 30px;
+  grid-auto-flow: row
+}
+
+.formulario {
+  display: flex;
+  flex-direction: column;
+  width: 500px;
+}
+
+
+.btnAdd {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-right: 10px;
+  margin-bottom: 20px;
+}
+
+#cerrar {
+  padding: 0px 10px;
+}
+
+#cerrar:hover {
+  cursor: pointer;
+}
+
+#footer {
+  height: 50px;
+  background-color: green;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+
+}
+
+#footer>p {
+  color: white;
+  font-size: 30px;
+}
+
+@media (max-width: 500px) {
+
+
+  .formulario {
     width: 100%;
-    display: flex;
-    justify-content: center;
-    
-  }
-  
-  #footer > p{
-    color: white;
-    font-size: 30px;
   }
 
-  @media (max-width: 500px){
-  
-
-   .formulario{
-    width: 100%;
-   }
-   
-   .fecha{
+  .fecha {
     flex-direction: column;
-   }
   }
+}
 
 
 /* Estilos de la pantalla de home */
 
-.home{
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 30px;
-    margin:50px
+.home {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 30px;
+  margin: 50px
 }
 
-@media (max-width: 400px){
-  .home{
+@media (max-width: 400px) {
+  .home {
     grid-template-columns: repeat(1, 1fr);
-    margin:50px
+    margin: 50px
   }
 }
 
-.homeBebidas{
-    width: 100%;
+.homeBebidas {
+  width: 100%;
 }
 
-.col{
-    display:flex;
-    flex-direction: column;
-    align-items: center;
-    border-radius: 10px;
-    border: 1px solid black;
+.col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 10px;
+  border: 1px solid black;
 }
 
 /* Estilos pantalla de header buscador de bebidas */
 
-.header{
-  background-color:steelblue;
+.header {
+  background-color: steelblue;
   display: flex;
   flex-direction: column;
   justify-content: left;
@@ -235,8 +235,8 @@ button{
   justify-content: space-between;
 }
 
-.header2{
-  background-image:url(../public/bg.jpg);
+.header2 {
+  background-image: url(../public/bg.jpg);
   background-size: cover;
   display: flex;
   flex-direction: column;
@@ -246,79 +246,87 @@ button{
   justify-content: space-between;
 }
 
-.logoHeader{
+.logoHeader {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
 }
 
-.logoHeader > div > img{
+.logoHeader>div>img {
   height: 100px;
 }
 
-.pages{
+.pages {
   display: flex;
-  align-items:end;
+  align-items: end;
   justify-content: end;
   margin-right: 20px;
   gap: 10px;
 }
 
-.pages > h2{
-  margin:0 ;
+@media (max-width: 500px) {
+  .pages {
+    flex-direction: column;
+    align-items: start;
+    justify-content: end;
+  }
+}
+
+.pages>h2 {
+  margin: 0;
   margin-right: 20px;
 }
 
-.linkActivo{
+.linkActivo {
   color: orange;
   text-decoration: none !important;
 }
 
-.linkInactivo{
-  color:white;
+.linkInactivo {
+  color: white;
   text-decoration: none !important;
 }
 
-.form{
-  background-color:orange;
+.form {
+  background-color: orange;
 }
 
 
 
 /* Estilos pantalla de favoritos buscador de bebidas */
 
-.cardBebidas{
-  display:grid;
+.cardBebidas {
+  display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap:10px;
+  gap: 10px;
   align-items: center;
   padding: 20px;
 }
 
-.cardBebidas1{
-  display:grid;
+.cardBebidas1 {
+  display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap:10px;
+  gap: 10px;
   align-items: center;
   width: 90%;
   border: 1px solid blue;
-  padding:20px;
+  padding: 20px;
 }
 
-.bebida{
-  margin-top:20px;
+.bebida {
+  margin-top: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-@media (max-width: 500px){
-  .cardBebidas{
-    grid-template-columns:  1fr;
+@media (max-width: 500px) {
+  .cardBebidas {
+    grid-template-columns: 1fr;
   }
 
-  .cardBebidas1{
-    grid-template-columns:  1fr;
+  .cardBebidas1 {
+    grid-template-columns: 1fr;
   }
 }
 
