@@ -39,7 +39,13 @@ export default function Header() {
               <form className="form" style={{ width: '30%' }}>
                 <div style={{ padding: '10px' }}>
                   <label style={{ fontSize: '20px', textTransform: 'uppercase', fontWeight: 'bold' }}>Nombre o Ingredientes</label>
-                  <input type="text" placeholder="Nombre o ingrediente..." style={{ marginTop: "20px", padding: "10px", width: "100%", boxSizing: "border-box" }} />
+                  <input type="text" placeholder="Nombre o ingrediente..." style={{ marginTop: "20px", marginBottom:"20px",  padding: "10px", width: "100%", boxSizing: "border-box" }} />
+                  <label style={{ fontSize: '20px', textTransform: 'uppercase', fontWeight: 'bold' }}>Categoria de la bebida</label>
+                  <select name="" id="" style={{ marginTop: "20px", padding: "10px", width: "100%", boxSizing: "border-box" }}>
+                    {
+                      
+                    }
+                  </select>
                 </div>
               </form>
             )
