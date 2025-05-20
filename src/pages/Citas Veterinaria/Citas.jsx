@@ -8,6 +8,7 @@ import Typography from '@mui/material/Typography';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material';
 //import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import TextField from '@mui/material/TextField';
@@ -50,6 +51,7 @@ function Citas() {
     const [open, setOpen] = useState(false);
     const [openAlert, setOpenAlert] = useState(false);
     const [openAlert2, setOpenAlert2] = useState(false);
+    const [openAlert3, setOpenAlert3] = useState(false);
     const [error, setError] = useState("")
     const [bd, setBd] = useState(false);
     const [input, setInput] = useState({ mascota: "", estado: 0, propietario: "", sintomas: "", fecha: dayjs().add(1, 'day'), hora: dayjs('2022-04-17T15:30'), tipo: "No aplica", telefono: 0 });
@@ -84,9 +86,9 @@ function Citas() {
         console.log(input);
     };
 
-    const deleteData = (i)=>{
+    const deleteData = (i) => {
         console.log(i);
-        
+        setOpenAlert3(true)
     }
 
     const handleClose = () => {
@@ -130,21 +132,21 @@ function Citas() {
 
     }
 
-    const cambiarEstado = (valor="", e="", i)=>{
-        console.log(e.estado!==valor.target?.value);
-       if (valor.target?.value!==e.estado){
-            let newDatos = [...datos] 
+    const cambiarEstado = (valor = "", e = "", i) => {
+        console.log(e.estado !== valor.target?.value);
+        if (valor.target?.value !== e.estado) {
+            let newDatos = [...datos]
             newDatos[i].estado = valor.target?.value
             setDatos(newDatos)
-        } 
+        }
     }
 
 
-    useEffect(()=>{
+    useEffect(() => {
         cambiarEstado(),
-        setFilteredDatos(
-            estado === "" ? datos : datos.filter(cita => cita.estado.toString() === estado)
-        );
+            setFilteredDatos(
+                estado === "" ? datos : datos.filter(cita => cita.estado.toString() === estado)
+            );
     }, [estado, datos])
 
 
@@ -181,7 +183,7 @@ function Citas() {
                 <h1>Administardor de citas</h1>
             </div>
             <div className='btnAdd'>
-                <FormControl sx={{ width: "25%", textAlign:"center"}}>
+                <FormControl sx={{ width: "25%", textAlign: "center" }}>
                     <InputLabel id="demo-select-small-label">Filtrar por estado</InputLabel>
                     <Select
                         labelId="demo-select-small-label"
@@ -199,7 +201,7 @@ function Citas() {
 
                     </Select>
                 </FormControl>
-                <Button variant="outlined"  color="success" onClick={handleClickOpen}>
+                <Button variant="outlined" color="success" onClick={handleClickOpen}>
                     Agregar cita
                 </Button>
             </div>
@@ -233,7 +235,7 @@ function Citas() {
                                         Telefono: {e.telefono}
                                     </Typography>
                                     <Typography sx={{ textAlign: "left" }} gutterBottom variant="body1" component="div">
-                                        Fecha: {e.fecha.$D + " - " } {parseInt(e.fecha.$M) +1} {" - " + e.fecha.$y}  Hora: {dayjs(e.hora).hour().toString().padStart(2, "0") + ":" + dayjs(e.hora).minute().toString().padStart(2, "0") + ":" + dayjs(e.hora).second().toString().padStart(2, "0")}
+                                        Fecha: {e.fecha.$D + " - "} {parseInt(e.fecha.$M) + 1} {" - " + e.fecha.$y}  Hora: {dayjs(e.hora).hour().toString().padStart(2, "0") + ":" + dayjs(e.hora).minute().toString().padStart(2, "0") + ":" + dayjs(e.hora).second().toString().padStart(2, "0")}
                                     </Typography>
 
                                     <Typography sx={{ textAlign: "justify" }} variant="body2" color="text.secondary">
@@ -262,7 +264,7 @@ function Citas() {
                                 </CardContent>
                                 <CardActions sx={{ display: "flex", justifyContent: "end", position: "absolute", bottom: "0", right: "0" }}>
                                     <Button variant='outlined' size="small" onClick={() => { handleClickOpen(e, true, i) }}>📝</Button>
-                                    <Button variant='outlined' color='error' size="small" onClick={()=>{deleteData(i)}}>❌</Button>
+                                    <Button variant='outlined' color='error' size="small" onClick={() => { deleteData(i) }}>❌</Button>
                                 </CardActions>
                             </Card>
                         })
@@ -318,11 +320,11 @@ function Citas() {
                             sx={{ marginBottom: "10px" }}
                             className='caja'
                         />
-                        <div className='fecha' style={{ display: "flex", gap:"10px", marginBottom: "20px" }}>
+                        <div className='fecha' style={{ display: "flex", gap: "10px", marginBottom: "20px" }}>
                             <LocalizationProvider dateAdapter={AdapterDayjs}>
-                                <DemoContainer  components={['DatePicker']} sx={{  }}>
+                                <DemoContainer components={['DatePicker']} sx={{}}>
                                     <DatePicker
-                                    className='caja'
+                                        className='caja'
                                         label="Fecha de cita"
                                         minDate={dayjs().add(1, 'day')}
                                         id="fecha"
@@ -332,7 +334,7 @@ function Citas() {
                                 </DemoContainer>
                             </LocalizationProvider>
                             <LocalizationProvider dateAdapter={AdapterDayjs}>
-                                <DemoContainer className='caja' components={['TimePicker']} sx={{  }}>
+                                <DemoContainer className='caja' components={['TimePicker']} sx={{}}>
                                     <TimePicker label="Basic time picker" id="hora" className='caja'
                                         value={input.hora}
                                         onChange={(value) => setInput({ ...input, hora: value })} />
@@ -381,7 +383,7 @@ function Citas() {
 
                 </DialogContent>
                 <DialogActions>
-                    <Button variant='outlined' color="error"  onClick={handleClose}>Cerrar</Button>
+                    <Button variant='outlined' color="error" onClick={handleClose}>Cerrar</Button>
                     <Button variant='outlined' color="success" autoFocus onClick={validationData}>
                         Guardar
                     </Button>
@@ -417,6 +419,37 @@ function Citas() {
                     Registro exitoso
                 </Alert>
             </Snackbar>
+            <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+                <Alert
+                    onClose={handleClose}
+                    severity="success"
+                    variant="filled"
+                    sx={{ width: '100%' }}
+                >
+                    This is a success Alert inside a Snackbar!
+                </Alert>
+            </Snackbar>
+            <Dialog
+                open={openAlert3}
+                onClose={handleClose}
+                PaperComponent={PaperComponent}
+                aria-labelledby="draggable-dialog-title"
+            >
+                <DialogTitle style={{ cursor: 'move' }} id="draggable-dialog-title">
+                    Confirmar
+                </DialogTitle>
+                <DialogContent>
+                    <DialogContentText>
+                        ¿Esta seguro que desea eliminar esta cita?
+                    </DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                    <Button autoFocus onClick={handleClose4}>
+                        Cancelar
+                    </Button>
+                    <Button onClick={handleConfirmationDelete}>Aceptar</Button>
+                </DialogActions>
+            </Dialog>
         </div>
     )
 }
