@@ -84,6 +84,11 @@ function Citas() {
         console.log(input);
     };
 
+    const deleteData = (i)=>{
+        console.log(i);
+        
+    }
+
     const handleClose = () => {
         setOpen(false);
         setInput({ mascota: "", estado: 0, propietario: "", sintomas: "", fecha: dayjs().add(1, 'day'), hora: dayjs().add(1, 'day'), tipo: "No aplica", telefono: 0 })
@@ -257,7 +262,7 @@ function Citas() {
                                 </CardContent>
                                 <CardActions sx={{ display: "flex", justifyContent: "end", position: "absolute", bottom: "0", right: "0" }}>
                                     <Button variant='outlined' size="small" onClick={() => { handleClickOpen(e, true, i) }}>📝</Button>
-                                    <Button variant='outlined' color='error' size="small">❌</Button>
+                                    <Button variant='outlined' color='error' size="small" onClick={()=>{deleteData(i)}}>❌</Button>
                                 </CardActions>
                             </Card>
                         })
