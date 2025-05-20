@@ -108,6 +108,10 @@ function Citas() {
         setOpenAlert3(false)
     }
 
+    const handleConfirmationDelete = ()=>{
+
+    }
+
     const saveData = () => {
         console.log(id);
         if (bd == false) {
@@ -423,20 +427,10 @@ function Citas() {
                     Registro exitoso
                 </Alert>
             </Snackbar>
-            <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
-                <Alert
-                    onClose={handleClose}
-                    severity="success"
-                    variant="filled"
-                    sx={{ width: '100%' }}
-                >
-                    This is a success Alert inside a Snackbar!
-                </Alert>
-            </Snackbar>
             <Dialog
                 open={openAlert3}
                 onClose={handleClose}
-                PaperComponent={PaperComponent}
+                
                 aria-labelledby="draggable-dialog-title"
             >
                 <DialogTitle style={{ cursor: 'move' }} id="draggable-dialog-title">

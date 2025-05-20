@@ -138,9 +138,10 @@ label {
 
 .cards {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 30px;
-  grid-auto-flow: row
+  grid-auto-flow: row;
+  margin-bottom: 20px;
 }
 
 .formulario {
@@ -167,7 +168,6 @@ label {
 }
 
 #footer {
-  height: 50px;
   background-color: green;
   position: fixed;
   bottom: 0;
@@ -175,12 +175,13 @@ label {
   width: 100%;
   display: flex;
   justify-content: center;
-
+  
 }
 
 #footer>p {
   color: white;
-  font-size: 30px;
+  font-size: 25px;
+  margin: 10px 0;
 }
 
 @media (max-width: 500px) {
