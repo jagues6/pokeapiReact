@@ -61,7 +61,6 @@ function Citas() {
 
 
     const changeValue = (e) => {
-        console.log(e.target);
         /* setInput(prev => ({...prev, fecha:e.$y+"-"+e.$M?.toString().padStart(2,0)+"-"+e.$D?.toString().padStart(2,0),
             mascota:e.target.value
         })) */
@@ -108,16 +107,16 @@ function Citas() {
         setOpenAlert3(false)
     }
 
-    const handleConfirmationDelete = ()=>{
+  /*   const handleConfirmationDelete = ()=>{
 
-    }
+    } */
 
     const saveData = () => {
         console.log(id);
         if (bd == false) {
             setDatos(
                 prevValue => [{
-                    mascota: input.mascota, propietario: input.propietario, sintomas: input.sintomas,
+                    cita:Math.round(Date.now()+Math.random()*1000), mascota: input.mascota, propietario: input.propietario, sintomas: input.sintomas,
                     fecha: input.fecha, hora: input.hora, estado: 0, tipo: input.tipo, telefono: input.telefono
                 }, ...prevValue]
             )
@@ -140,11 +139,17 @@ function Citas() {
 
     }
 
-    const cambiarEstado = (valor = "", e = "", i) => {
+    const cambiarEstado = (valor = "", e = "") => {
+        console.log("valor "+valor.target?.value+" e "+e.cita);
+       
+        
         console.log(e.estado !== valor.target?.value);
+        let indice = datos.findIndex(item => item.cita == e.cita)
+        console.log("indice "+indice);
+        
         if (valor.target?.value !== e.estado) {
             let newDatos = [...datos]
-            newDatos[i].estado = valor.target?.value
+            newDatos[indice].estado = valor.target?.value
             setDatos(newDatos)
         }
     }
@@ -233,8 +238,11 @@ function Citas() {
                             return <Card key={i} sx={{ textAlign: "center", position: "relative", overflow: "visible" }}>
                                 <img style={{ height: "70px", width: "70px", position: "absolute", top: "-35px", right: "10%" }} src={e.tipo} alt="" />
                                 <CardContent>
+                                     <Typography gutterBottom variant="h5" component="div">
+                                        Numero: {e.cita}
+                                    </Typography>
                                     <Typography gutterBottom variant="h5" component="div">
-                                        {e.mascota}
+                                        Mascota: {e.mascota}
                                     </Typography>
                                     <Typography gutterBottom variant="subtitle1" component="div">
                                         Propietario: {e.propietario}
@@ -259,7 +267,7 @@ function Citas() {
                                                 color="primary"
                                                 value={e.estado}
                                                 sx={{ marginBottom: "35px" }}
-                                                onChange={(value) => cambiarEstado(value, e, i)}
+                                                onChange={(value) => cambiarEstado(value, e)}
                                             >
                                                 <MenuItem value="0">
                                                     Abierta
@@ -445,7 +453,7 @@ function Citas() {
                     <Button autoFocus onClick={handleClose4}>
                         Cancelar
                     </Button>
-                    <Button onClick={handleConfirmationDelete}>Aceptar</Button>
+                    <Button >Aceptar</Button>
                 </DialogActions>
             </Dialog>
         </div>
